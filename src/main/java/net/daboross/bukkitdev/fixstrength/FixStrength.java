@@ -16,8 +16,11 @@
  */
 package net.daboross.bukkitdev.fixstrength;
 
+import java.util.Map;
+import java.util.Random;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -58,14 +61,29 @@ public class FixStrength extends JavaPlugin implements Listener {
 	public void onHit(EntityDamageByEntityEvent evt) {
 		if (!evt.isCancelled()) {
 			if (evt.getDamager() instanceof Player) {
+				double addition = 0;
+				double multiplication = 1;
 				Player player = (Player) evt.getDamager();
 				for (PotionEffect potionEffect : player.getActivePotionEffects()) {
 					if (potionEffect.getType() == PotionEffectType.INCREASE_DAMAGE) {
-						evt.setDamage((evt.getDamage() * CONSTANT_TIMES / (CONSTANT_DIVIDE * potionEffect.getAmplifier()))
-								+ CONSTANT_PLUS + (CONSTANT_PLUS_2 * potionEffect.getAmplifier()));
+						multiplication *= CONSTANT_TIMES / (CONSTANT_DIVIDE * potionEffect.getAmplifier());
+						addition += CONSTANT_PLUS + (CONSTANT_PLUS_2 * potionEffect.getAmplifier());
 					}
 				}
+				for (Map.Entry<Enchantment, Integer> enchant : player.getItemInHand().getEnchantments().entrySet()) {
+					if (enchant.getKey() == Enchantment.DAMAGE_ALL) {
+						multiplication *= 1 / (enchant.getValue());
+						for (int i = 0; i < enchant.getValue(); i++) {
+							addition += getRandomEnchant();
+						}
+					}
+				}
+				evt.setDamage((evt.getDamage() * multiplication) + addition);
 			}
 		}
+	}
+
+	private double getRandomEnchant() {
+		return 0.5 + (Math.random() * 0.75);
 	}
 }
