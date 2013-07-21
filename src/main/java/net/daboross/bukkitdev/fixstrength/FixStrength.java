@@ -16,7 +16,6 @@
  */
 package net.daboross.bukkitdev.fixstrength;
 
-import org.bukkit.Effect;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
