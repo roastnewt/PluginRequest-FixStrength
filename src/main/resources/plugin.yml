@@ -1,5 +1,5 @@
 name: FixStrength
 main: net.daboross.bukkitdev.fixstrength.FixStrength
-version: 1.0
+version: 1.0.1
 author: Dabo Ross
 description: Fixes 1.6 strength to be same as 1.5 strength

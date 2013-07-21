@@ -3,7 +3,7 @@
     <groupId>net.daboross.bukkitdev.fixstrength</groupId>
     <artifactId>FixStrength</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.0.1</version>
     <name>FixStrength</name>
     <repositories>
         <repository>
