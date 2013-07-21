@@ -36,6 +36,7 @@ public class FixStrength extends JavaPlugin implements Listener {
 	private static final double CONSTANT_TIMES = 10;
 	private static final double CONSTANT_DIVIDE = 13;
 	private static final double CONSTANT_PLUS = 1.5;
+	private static final double CONSTANT_PLUS_2 = 0.5;
 
 	@Override
 	public void onEnable() {
@@ -60,7 +61,8 @@ public class FixStrength extends JavaPlugin implements Listener {
 				Player player = (Player) evt.getDamager();
 				for (PotionEffect potionEffect : player.getActivePotionEffects()) {
 					if (potionEffect.getType() == PotionEffectType.INCREASE_DAMAGE) {
-						evt.setDamage((evt.getDamage() * CONSTANT_TIMES / (CONSTANT_DIVIDE * potionEffect.getAmplifier())) + (CONSTANT_PLUS * potionEffect.getAmplifier()));
+						evt.setDamage((evt.getDamage() * CONSTANT_TIMES / (CONSTANT_DIVIDE * potionEffect.getAmplifier()))
+								+ CONSTANT_PLUS + (CONSTANT_PLUS_2 * potionEffect.getAmplifier()));
 					}
 				}
 			}
