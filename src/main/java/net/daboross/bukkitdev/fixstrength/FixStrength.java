@@ -67,7 +67,7 @@ public class FixStrength extends JavaPlugin implements Listener {
 				for (PotionEffect potionEffect : player.getActivePotionEffects()) {
 					if (potionEffect.getType() == PotionEffectType.INCREASE_DAMAGE) {
 						multiplication *= CONSTANT_TIMES / (CONSTANT_DIVIDE * potionEffect.getAmplifier());
-						addition += CONSTANT_PLUS + (CONSTANT_PLUS_2 * potionEffect.getAmplifier());
+						addition += CONSTANT_PLUS + (CONSTANT_PLUS_2 * (potionEffect.getAmplifier() + 1));
 					}
 				}
 				for (Map.Entry<Enchantment, Integer> enchant : player.getItemInHand().getEnchantments().entrySet()) {
